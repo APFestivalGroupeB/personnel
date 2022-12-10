@@ -2,7 +2,7 @@ package testsUnitaires;
 
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
-
+import java.util.ArrayList;
 import personnel.*;
 
 class testEmploye
@@ -100,5 +100,18 @@ class testEmploye
 		employe.remove();
 		assertNotEquals(employe, ligue.getEmployes());
 	}
-	
+	@Test
+	void compareTo() throws SauvegardeImpossible
+	{
+		Ligue ligue = gestionPersonnel.addLigue("Bowling");
+		Employe employe = ligue.addEmploye ("Bouchard", "Gérard", "g.bouchard@gmail.com", "azerty");
+		Employe employe2 = ligue.addEmploye ("Bouchard", "Jean", "j.michel@gmail.com", "azerty");
+		assertEquals(-3, employe.compareTo(employe2));
+	}
+//	@Test 
+//	void ToString() throws SauvegardeImpossible
+//	{
+//		
+//	}
+//	
 }
