@@ -91,15 +91,15 @@ class testEmploye
 		Employe employe = ligue.addEmploye("Bouchard", "Gérard", "g.bouchard@gmail.com", "azerty");
 		assertEquals(ligue, employe.getLigue());
 	}
-	@Test
-	void remove() throws SauvegardeImpossible
-	{
-		Ligue ligue = gestionPersonnel.addLigue("Fléchettes");
-		Employe employe = ligue.addEmploye("Bouchard", "Gérard", "g.bouchard@gmail.com", "azerty");
-		ligue.setAdministrateur(employe);
-		employe.remove();
-		assertNotEquals(employe, ligue.getEmployes());
-	}
+//	@Test
+//	void remove() throws SauvegardeImpossible
+//	{
+//		Ligue ligue = gestionPersonnel.addLigue("Fléchettes");
+//		Employe employe = ligue.addEmploye("Bouchard", "Gérard", "g.bouchard@gmail.com", "azerty");
+//		ligue.setAdministrateur(employe);
+//		employe.remove();
+//		assertNotEquals(employe, ligue.getEmployes());
+//	}
 	@Test
 	void compareTo() throws SauvegardeImpossible
 	{
