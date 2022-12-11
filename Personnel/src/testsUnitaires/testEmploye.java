@@ -2,12 +2,37 @@ package testsUnitaires;
 
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
+
+import java.time.LocalDate;
 import java.util.ArrayList;
 import personnel.*;
 
 class testEmploye
 {
 	GestionPersonnel gestionPersonnel = GestionPersonnel.getGestionPersonnel();
+	
+	@Test
+	void getDateArrivee() throws SauvegardeImpossible
+	{
+		Ligue ligue = gestionPersonnel.addLigue("Fléchettes");
+		Employe employe = ligue.addEmploye("Bouchard", "Gérard", "g.bouchard@gmail.com", "azerty");
+		assertEquals(LocalDate.now(), employe.getDateArrivee());
+	}
+	@Test
+	void getDateDepart() throws SauvegardeImpossible
+	{
+		Ligue ligue = gestionPersonnel.addLigue("Fléchettes");
+		Employe employe = ligue.addEmploye("Bouchard", "Gérard", "g.bouchard@gmail.com", "azerty", LocalDate.of(2022, 12, 20));
+		assertEquals(LocalDate.of(2022, 12, 20), employe.getDateDepart());
+	}
+	@Test
+	void setDateDepart() throws SauvegardeImpossible
+	{
+		Ligue ligue = gestionPersonnel.addLigue("Fléchettes");
+		Employe employe = ligue.addEmploye("Bouchard", "Gérard", "g.bouchard@gmail.com", "azerty", LocalDate.of(2022, 12, 20));
+		employe.setDateDepart(LocalDate.of(2023, 01, 23));
+		assertEquals(LocalDate.of(2023, 01, 23), employe.getDateDepart());
+	}
 	
 	@Test
 	void estAdmin() throws SauvegardeImpossible

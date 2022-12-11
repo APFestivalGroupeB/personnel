@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Collections;
 import java.util.SortedSet;
 import java.util.TreeSet;
+import java.time.LocalDate;
 
 /**
  * Représente une ligue. Chaque ligue est reliée à une liste
@@ -111,6 +112,12 @@ public class Ligue implements Serializable, Comparable<Ligue>
 	public Employe addEmploye(String nom, String prenom, String mail, String password)
 	{
 		Employe employe = new Employe(this.gestionPersonnel, this, nom, prenom, mail, password);
+		employes.add(employe);
+		return employe;
+	}
+	public Employe addEmploye(String nom, String prenom, String mail, String password, LocalDate dateDepart)
+	{
+		Employe employe = new Employe(this.gestionPersonnel, this, nom, prenom, mail, password, dateDepart);
 		employes.add(employe);
 		return employe;
 	}
