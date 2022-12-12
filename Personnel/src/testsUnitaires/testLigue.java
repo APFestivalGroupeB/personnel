@@ -72,6 +72,19 @@ class testLigue
 		assertEquals(employe2,ligue.getEmployes().last());
 	}
 	@Test
+	void compareTo() throws SauvegardeImpossible
+	{
+		Ligue ligue1 = gestionPersonnel.addLigue("Fléchettes");
+		Ligue ligue2 = gestionPersonnel.addLigue("Bowling");
+		assertEquals(4, ligue1.compareTo(ligue2));
+	}
+	@Test 
+	void ToString() throws SauvegardeImpossible
+	{
+		Ligue ligue = gestionPersonnel.addLigue("Fléchettes");
+		assertEquals("Fléchettes", ligue.toString());
+	}
+	@Test
 	void removeligue() throws SauvegardeImpossible
 	{
 		Ligue ligue = gestionPersonnel.addLigue("Fléchettes");
@@ -79,18 +92,5 @@ class testLigue
 		Ligue ligue2 = gestionPersonnel.addLigue("Bowling");
 		ligue.remove();
 		assertEquals(ligue2, gestionPersonnel.getLigues().first());
-	}
-	@Test
-	void compareTo() throws SauvegardeImpossible
-	{
-		Ligue ligue1 = gestionPersonnel.addLigue("Bowling");
-		Ligue ligue2 = gestionPersonnel.addLigue("Flechettes");
-		assertEquals(-4, ligue1.compareTo(ligue2));
-	}
-	@Test 
-	void ToString() throws SauvegardeImpossible
-	{
-		Ligue ligue = gestionPersonnel.addLigue("Fléchettes");
-		assertEquals("Fléchettes", ligue.toString());
 	}
 }
