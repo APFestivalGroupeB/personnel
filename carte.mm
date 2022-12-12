@@ -92,7 +92,7 @@
 </node>
 </node>
 <node CREATED="1670254046900" ID="ID_1851961480" MODIFIED="1670254053580" TEXT="Supprimer un employ&#xe9;">
-<node CREATED="1670254668844" ID="ID_1897011451" MODIFIED="1670254676817" TEXT="S&#xe9;lection employ&#xe9; &#xe0; modifier"/>
+<node CREATED="1670254668844" ID="ID_1897011451" MODIFIED="1670854583705" TEXT="S&#xe9;lection employ&#xe9; &#xe0; supprimer"/>
 </node>
 </node>
 </node>
