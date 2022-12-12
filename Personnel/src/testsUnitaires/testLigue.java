@@ -88,9 +88,7 @@ class testLigue
 	void removeligue() throws SauvegardeImpossible
 	{
 		Ligue ligue = gestionPersonnel.addLigue("Fléchettes");
-		Employe employe = ligue.addEmploye ("Bouchard", "Gérard", "g.bouchard@gmail.com", "azerty");
-		Ligue ligue2 = gestionPersonnel.addLigue("Bowling");
 		ligue.remove();
-		assertEquals(ligue2, gestionPersonnel.getLigues().first());
+		assertFalse(gestionPersonnel.getLigues().contains(ligue));
 	}
 }
