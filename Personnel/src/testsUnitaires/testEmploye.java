@@ -124,6 +124,7 @@ class testEmploye
 		ligue.setAdministrateur(employe);
 		employe.remove();
 		assertFalse(ligue.getEmployes().contains(employe));
+		assertEquals(gestionPersonnel.getRoot(), ligue.getAdministrateur());
 	}
 	@Test
 	void compareTo() throws SauvegardeImpossible
