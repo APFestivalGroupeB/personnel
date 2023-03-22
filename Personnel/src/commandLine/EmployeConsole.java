@@ -2,10 +2,14 @@ package commandLine;
 
 import static commandLineMenus.rendering.examples.util.InOut.getString;
 
+import java.util.ArrayList;
+
+import commandLineMenus.List;
 import commandLineMenus.ListOption;
 import commandLineMenus.Menu;
 import commandLineMenus.Option;
 import personnel.Employe;
+import personnel.Ligue;
 
 public class EmployeConsole 
 {
@@ -18,17 +22,26 @@ public class EmployeConsole
 	{
 		return (employe) -> editerEmploye(employe);		
 	}
-
+	
 	Option editerEmploye(Employe employe)
 	{
 			Menu menu = new Menu("Gérer le compte " + employe.getNom(), "c");
-			menu.add(afficher(employe));
-			menu.add(changerNom(employe));
-			menu.add(changerPrenom(employe));
-			menu.add(changerMail(employe));
-			menu.add(changerPassword(employe));
+			menu.add(modifierEmploye(employe));
+			menu.add(supprimerEmploye(employe));
 			menu.addBack("q");
 			return menu;
+	}
+	Option modifierEmploye(Employe employe)
+	{
+		Menu menu = new Menu("Modifier le compte " + employe.getNom(), "o");
+		menu.add(afficher(employe));
+		menu.add(changerNom(employe));
+		menu.add(changerPrenom(employe));
+		menu.add(changerMail(employe));
+		menu.add(changerPassword(employe));
+		menu.add(changerDateDepart(employe));
+		menu.addBack("q");
+		return menu;
 	}
 
 	private Option changerNom(final Employe employe)
@@ -45,12 +58,20 @@ public class EmployeConsole
 	
 	private Option changerMail(final Employe employe)
 	{
-		return new Option("Changer le mail", "e", () -> {employe.setMail(getString("Nouveau mail : "));});
+		return new Option("Changer le mail", "m", () -> {employe.setMail(getString("Nouveau mail : "));});
 	}
 	
 	private Option changerPassword(final Employe employe)
 	{
 		return new Option("Changer le password", "x", () -> {employe.setPassword(getString("Nouveau password : "));});
+	}
+	private Option changerDateDepart(final Employe employe)
+	{
+		return new Option("Changer la date de départ", "y", () ->{employe.setDateDepart(getString("Nouvelle date : "));});
+	}
+	private Option supprimerEmploye(final Employe employe)
+	{
+		return new Option("Supprimer l'employé", "r", () -> {employe.remove();});
 	}
 	
 

@@ -21,7 +21,7 @@ public class Employe implements Serializable, Comparable<Employe>
 	
 	
 	/*Employé en CDI*/
-	Employe(GestionPersonnel gestionPersonnel, Ligue ligue, String nom, String prenom, String mail, String password)
+	Employe(GestionPersonnel gestionPersonnel, Ligue ligue, String nom, String prenom, String mail, String password, LocalDate dateArrivee)
 	{
 		this.gestionPersonnel = gestionPersonnel;
 		this.nom = nom;
@@ -35,7 +35,7 @@ public class Employe implements Serializable, Comparable<Employe>
 	}
 	
 	/*Employé en CDD*/
-	Employe(GestionPersonnel gestionPersonnel, Ligue ligue, String nom, String prenom, String mail, String password, LocalDate dateDepart)
+	Employe(GestionPersonnel gestionPersonnel, Ligue ligue, String nom, String prenom, String mail, String password, LocalDate dateArrivee, LocalDate dateDepart)
 	{
 		this.gestionPersonnel = gestionPersonnel;
 		this.nom = nom;
@@ -51,9 +51,10 @@ public class Employe implements Serializable, Comparable<Employe>
 	{
 		return this.dateArrivee;
 	}
-	public void setDateDepart(LocalDate dateDepart)
+	public void setDateDepart(String dateDepart)
 	{
-		this.dateDepart = dateDepart;	
+		LocalDate localdate = LocalDate.parse(dateDepart);
+		this.dateDepart = localdate;	
 	}
 	public LocalDate getDateDepart()
 	{

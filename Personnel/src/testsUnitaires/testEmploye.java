@@ -4,7 +4,6 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import personnel.*;
 
 class testEmploye
@@ -30,8 +29,8 @@ class testEmploye
 	{
 		Ligue ligue = gestionPersonnel.addLigue("Fléchettes");
 		Employe employe = ligue.addEmploye("Bouchard", "Gérard", "g.bouchard@gmail.com", "azerty", LocalDate.of(2022, 12, 20));
-		employe.setDateDepart(LocalDate.of(2023, 01, 23));
-		assertEquals(LocalDate.of(2023, 01, 23), employe.getDateDepart());
+		employe.setDateDepart("2016-08-16");
+		assertEquals(LocalDate.of(2016, 8, 16), employe.getDateDepart());
 	}
 	
 	@Test
@@ -133,6 +132,14 @@ class testEmploye
 		Employe employe = ligue.addEmploye ("Bouchard", "Gérard", "g.bouchard@gmail.com", "azerty");
 		Employe employe2 = ligue.addEmploye ("Bouchard", "Jean", "j.michel@gmail.com", "azerty");
 		assertEquals(-3, employe.compareTo(employe2));
+	}
+	@Test
+	void getLigue2()throws SauvegardeImpossible
+	{
+		Ligue ligue1 = gestionPersonnel.addLigue("Fléchettes");
+		Ligue ligue2 = gestionPersonnel.addLigue("Bowling");
+		assertEquals(gestionPersonnel.getRoot(), ligue1.getAdministrateur());
+		assertEquals(gestionPersonnel.getRoot(), ligue2.getAdministrateur());
 	}
 //	@Test 
 //	void ToString() throws SauvegardeImpossible
