@@ -15,7 +15,7 @@ public class EmployeConsole
 {
 	private Option afficher(final Employe employe)
 	{
-		return new Option("Afficher l'employé", "l", () -> {System.out.println(employe);});
+		return new Option("Afficher l'employé", "l", () -> {System.out.println(employe);System.out.println("Date d'arrivée :" + employe.getDateArrivee()); System.out.println("Date de départ :" + employe.getDateDepart());});
 	}
 
 	ListOption<Employe> editerEmploye()

@@ -53,8 +53,7 @@ public class Employe implements Serializable, Comparable<Employe>
 	}
 	public void setDateDepart(String dateDepart)
 	{
-		LocalDate localdate = LocalDate.parse(dateDepart);
-		this.dateDepart = localdate;	
+		this.dateDepart = LocalDate.parse(dateDepart);	
 	}
 	public LocalDate getDateDepart()
 	{
