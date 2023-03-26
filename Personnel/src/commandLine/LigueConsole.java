@@ -92,17 +92,18 @@ public class LigueConsole
 				);
 	}
 	
-	private Option ajouterEmploye(final Ligue ligue)
-	{
-		return new Option("ajouter un employé", "a",
-				() -> 
-				{
-					ligue.addEmploye(getString("nom : "), 
-						getString("prenom : "), getString("mail : "), 
-						getString("password : "), LocalDate.parse(getString("date de départ : ")));
-				}
-		);
-	}
+//	private Option ajouterEmploye(final Ligue ligue)
+//	{
+//		return new Option("ajouter un employé", "a",
+//				() -> 
+//				{
+//					ligue.addEmploye(getString("nom : "), 
+//						getString("prenom : "), getString("mail : "), 
+//						getString("password : "), LocalDate.parse(getString("date de départ : ")));
+//				}
+//		);
+//	}
+
 	
 	private Menu gererEmployes(Ligue ligue)
 	{
@@ -121,6 +122,14 @@ public class LigueConsole
 //				(index, element) -> {element.remove();}
 //				);
 //	}
+	private Option ajouterEmploye(final Ligue ligue)
+	{
+		Menu menu = new Menu("ajouter un employe ", "a" );
+		menu.add(CDI(ligue));
+		menu.add(CDD(ligue));
+		menu.addBack("q");
+		return menu;
+	}
 	
 	private List<Employe> changerAdministrateur(final Ligue ligue)
 	{
@@ -139,5 +148,26 @@ public class LigueConsole
 	{
 		return new Option("Supprimer", "d", () -> {ligue.remove();});
 	}
-	
+	private Option CDI(Ligue ligue)
+	{
+		return new Option("CDI", "i",
+				() -> 
+				{
+					ligue.addEmploye(getString("nom : "), 
+						getString("prenom : "), getString("mail : "), 
+						getString("password : "));
+				}
+		);
+	}
+	private Option CDD(Ligue ligue)
+	{
+		return new Option("CDD", "d",
+				() -> 
+				{
+					ligue.addEmploye(getString("nom : "), 
+						getString("prenom : "), getString("mail : "), 
+						getString("password : "),LocalDate.parse(getString("date de départ : ")));
+				}
+		);
+	}
 }

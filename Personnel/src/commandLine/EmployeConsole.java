@@ -25,7 +25,7 @@ public class EmployeConsole
 	
 	Option editerEmploye(Employe employe)
 	{
-			Menu menu = new Menu("Gérer le compte " + employe.getNom(), "c");
+			Menu menu = new Menu("Gérer le compte " + employe.getNom()+ " " + employe.getPrenom() , "c");
 			menu.add(modifierEmploye(employe));
 			menu.add(supprimerEmploye(employe));
 			menu.addBack("q");
@@ -33,7 +33,7 @@ public class EmployeConsole
 	}
 	Option modifierEmploye(Employe employe)
 	{
-		Menu menu = new Menu("Modifier le compte " + employe.getNom(), "o");
+		Menu menu = new Menu("Modifier le compte " + employe.getNom()+ " " + employe.getPrenom(), "o");
 		menu.add(afficher(employe));
 		menu.add(changerNom(employe));
 		menu.add(changerPrenom(employe));
