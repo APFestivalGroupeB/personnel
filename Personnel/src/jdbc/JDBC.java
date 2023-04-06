@@ -73,9 +73,11 @@ public class JDBC implements Passerelle
 	{
 		try 
 		{
+			String sql = "insert into ligue(nom, administrateur) values (?,?)";
 			PreparedStatement instruction;
-			instruction = connection.prepareStatement("insert into ligue (nom) values(?)", Statement.RETURN_GENERATED_KEYS);
-			instruction.setString(1, ligue.getNom());		
+			instruction = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+			instruction.setString(1, ligue.getNom());
+			instruction.setString(2, ligue.getAdministrateur().getNom());
 			instruction.executeUpdate();
 			ResultSet id = instruction.getGeneratedKeys();
 			id.next();
@@ -86,5 +88,45 @@ public class JDBC implements Passerelle
 			exception.printStackTrace();
 			throw new SauvegardeImpossible(exception);
 		}		
+	}
+	@Override
+	public void updateLigue(Ligue ligue) throws SauvegardeImpossible
+	{
+		try
+		{
+			String sql = "update ligue set nom = ? where id_ligue = ?";
+			PreparedStatement instruction;
+			instruction = connection.prepareStatement(sql);
+			instruction.setString(1, ligue.getNom());
+//			instruction.setString(2, ligue.getAdministrateur().getNom());
+			instruction.setInt(2, ligue.getid_ligue());
+			instruction.executeUpdate();
+		}
+		catch (SQLException exception) 
+		{
+			exception.printStackTrace();
+			throw new SauvegardeImpossible(exception);
+		}
+	}
+	public void insertEmploye(Employe employe) throws SauvegardeImpossible
+	{
+		try
+		{
+			String sql = "insert into employe(nomEmploye, prenomEmploye, password, mail, DateArrivee, DateDepart, id_ligue) values (?,?,?,?,?,?,?,?)";
+			PreparedStatement instruction;
+			instruction = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+			instruction.setString(1, employe.getNom());
+			instruction.setString(2, employe.getPrenom());
+			instruction.setString(3, employe.);			
+			instruction.executeUpdate();
+			ResultSet id = instruction.getGeneratedKeys();
+			id.next();
+			return id.getInt(1);
+		}
+		catch (SQLException exception) 
+		{
+			exception.printStackTrace();
+			throw new SauvegardeImpossible(exception);
+		}	
 	}
 }
