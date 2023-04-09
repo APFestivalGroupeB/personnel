@@ -153,9 +153,11 @@ public class LigueConsole
 		return new Option("CDI", "i",
 				() -> 
 				{
-					ligue.addEmploye(getString("nom : "), 
-						getString("prenom : "), getString("mail : "), 
-						getString("password : "));
+					
+						ligue.addEmploye(getString("nom : "), 
+							getString("prenom : "), getString("mail : "), 
+							getString("password : "));
+					
 				}
 		);
 	}
@@ -164,9 +166,12 @@ public class LigueConsole
 		return new Option("CDD", "d",
 				() -> 
 				{
-					ligue.addEmploye(getString("nom : "), 
-						getString("prenom : "), getString("mail : "), 
-						getString("password : "),LocalDate.parse(getString("date de départ : ")));
+				
+						ligue.addEmploye(getString("nom : "), 
+							getString("prenom : "), getString("mail : "), 
+							getString("password : "),LocalDate.parse(getString("date de départ : ")));
+					
+					
 				}
 		);
 	}

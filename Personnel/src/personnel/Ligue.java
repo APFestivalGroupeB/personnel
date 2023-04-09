@@ -30,7 +30,7 @@ public class Ligue implements Serializable, Comparable<Ligue>
 	
 	Ligue(GestionPersonnel gestionPersonnel, String nom) throws SauvegardeImpossible
 	{
-		this(gestionPersonnel, -1, nom);
+		this(gestionPersonnel,-1, nom);
 		this.id = gestionPersonnel.insert(this); 
 	}
 
@@ -48,7 +48,7 @@ public class Ligue implements Serializable, Comparable<Ligue>
 	 * @return le nom de la ligue.
 	 */
 
-	public int getid_ligue()
+	public int getId_ligue()
 	{
 		return id;
 	}
@@ -113,16 +113,27 @@ public class Ligue implements Serializable, Comparable<Ligue>
 	 * @return l'employé créé. 
 	 */
 
-	public Employe addEmploye(String nom, String prenom, String mail, String password)
+	public Employe addEmploye(String nom, String prenom, String mail, String password) 
 	{
 		Employe employe = new Employe(this.gestionPersonnel, this, nom, prenom, mail, password);
 		employes.add(employe);
+		try {
+			employe.setid(gestionPersonnel.insertemploye(employe));
+		} catch (SauvegardeImpossible e) {
+			e.printStackTrace();
+		}
 		return employe;
 	}
+	
 	public Employe addEmploye(String nom, String prenom, String mail, String password, LocalDate dateDepart)
 	{
 		Employe employe = new Employe(this.gestionPersonnel, this, nom, prenom, mail, password, dateDepart);
 		employes.add(employe);
+		try {
+			employe.setid(gestionPersonnel.insertemploye(employe));
+		} catch (SauvegardeImpossible e) {
+			e.printStackTrace();
+		}
 		return employe;
 	}
 	

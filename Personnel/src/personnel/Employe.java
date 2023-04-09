@@ -2,6 +2,7 @@ package personnel;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.TreeSet;
 
 /**
  * Employé d'une ligue hébergée par la M2L. Certains peuvent 
@@ -14,11 +15,23 @@ import java.time.LocalDate;
 public class Employe implements Serializable, Comparable<Employe>
 {
 	private static final long serialVersionUID = 4795721718037994734L;
+	private int id_employe = -1;
 	private String nom, prenom, password, mail;
 	private Ligue ligue;
 	private GestionPersonnel gestionPersonnel;
 	private LocalDate dateArrivee, dateDepart;
 	
+	Employe(GestionPersonnel gestionPersonnel, String nom) throws SauvegardeImpossible
+	{
+		this(gestionPersonnel, -1, nom);
+		this.id_employe = gestionPersonnel.insertemploye(this); 
+	}
+	Employe(GestionPersonnel gestionPersonnel, int id_employe, String nom)
+	{
+		this.nom = nom;
+		this.gestionPersonnel = gestionPersonnel;
+		this.id_employe = id_employe;
+	}
 	
 	/*Employé en CDI*/
 	Employe(GestionPersonnel gestionPersonnel, Ligue ligue, String nom, String prenom, String mail, String password)
@@ -53,7 +66,13 @@ public class Employe implements Serializable, Comparable<Employe>
 	}
 	public void setDateDepart(String dateDepart)
 	{
-		this.dateDepart = LocalDate.parse(dateDepart);	
+		this.dateDepart = LocalDate.parse(dateDepart);
+//		try {
+//			this.updateEmploye("DateDepart");
+//		}catch(Sauvegarde Impossible e)
+//		{
+//			return e;
+//		}
 	}
 	public LocalDate getDateDepart()
 	{
@@ -87,6 +106,14 @@ public class Employe implements Serializable, Comparable<Employe>
 	 * Retourne le nom de l'employé.
 	 * @return le nom de l'employé. 
 	 */
+	public int getid()
+	{
+		return id_employe;
+	}
+	public void setid(int id)
+	{
+		this.id_employe = id;
+	}
 	
 	public String getNom()
 	{
@@ -164,6 +191,11 @@ public class Employe implements Serializable, Comparable<Employe>
 	public void setPassword(String password)
 	{
 		this.password= password;
+	}
+	
+	public String getPassword()
+	{
+		return password;
 	}
 
 	/**
