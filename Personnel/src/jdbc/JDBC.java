@@ -51,27 +51,25 @@ public class JDBC implements Passerelle
 		        ResultSet employe = response.executeQuery();
 		        Ligue ligue = gestionPersonnel.getLigues().last();
 			
-				while (employe.next()) {
-					
+				while (employe.next()) 
+				{
 					int id = employe.getInt("id_employe");
 			        String  nom = employe.getString("nomEmploye");
 				    String  prenom = employe.getString("prenomEmploye");
 //				    Long num_sec_soc = employe.getLong("num_sec_soc"); 
 				    String	mail = employe.getString("mail");
 		            String	password = employe.getString("password");
-					
-		            LocalDate dateArrivee = employe.getString("dateArrivee") != null ?
-	                        LocalDate.parse(employe.getString("dateArrivee"), DateTimeFormatter.ofPattern("yyyy-MM-dd")) : null;
-		            LocalDate dateDepart = employe.getString("dateDepart") != null ? 
-	                        LocalDate.parse(employe.getString("dateDepart"), DateTimeFormatter.ofPattern("yyyy-MM-dd")) : null;
-	
+		            LocalDate dateArrivee = employe.getString("DateArrivee") != null ?
+	                        LocalDate.parse(employe.getString("DateArrivee"), DateTimeFormatter.ofPattern("yyyy-MM-dd")) : null;
+		            LocalDate dateDepart = employe.getString("DateDepart") != null ? 
+	                        LocalDate.parse(employe.getString("DateDepart"), DateTimeFormatter.ofPattern("yyyy-MM-dd")) : null;
 				    Employe employes = ligue.addEmploye(nom, prenom, mail, password, dateDepart);
 				    
-					    if(employe.getBoolean("admin")) {
+					    if(employe.getBoolean("administrateur")) {
 					    	ligue.setAdministrateur(employes);
 					    }
 
-				} 
+				}
 			}
 		}
 
@@ -127,7 +125,7 @@ public class JDBC implements Passerelle
 public void updateLigue(Ligue ligue) throws SauvegardeImpossible {
     try {
         PreparedStatement instruction = connection.prepareStatement(
-            "update ligue set nom=? where id=?"
+            "update ligue set nom=? where id_employe=?"
         );
         instruction.setString(1, ligue.getNom());
         instruction.setInt(2, ligue.getId_ligue());
@@ -147,7 +145,7 @@ public int insertemploye(Employe employe) throws SauvegardeImpossible {
         instruction.setString(3, employe.getPassword());
         instruction.setString(4, employe.getMail());
         instruction.setDate(5, Date.valueOf(employe.getDateArrivee()));
-        instruction.setDate(6, employe.getDateArrivee() == null ? null : Date.valueOf(employe.getDateArrivee()));
+        instruction.setDate(6, employe.getDateDepart() == null ? null : Date.valueOf(employe.getDateArrivee()));
         instruction.setInt(7, employe.getLigue().getId_ligue());
         instruction.executeUpdate();
         ResultSet id = instruction.getGeneratedKeys();
@@ -165,7 +163,7 @@ public int insertemploye(Employe employe) throws SauvegardeImpossible {
 public void updateEmploye(Employe employe) throws SauvegardeImpossible {
     try {
         PreparedStatement instruction = connection.prepareStatement(
-            "update employe set nom=?, prenom=?, password=?, mail=?, DateArrivee=?, DateDepart=? where id=?"
+            "update employe set nom=?, prenom=?, password=?, mail=?, DateArrivee=?, DateDepart=? where id_employe=?"
         );
         instruction.setString(1, employe.getNom());
         instruction.setString(2, employe.getPrenom());
@@ -186,7 +184,7 @@ public void updateEmploye(Employe employe) throws SauvegardeImpossible {
 public void deleteLigue(Ligue ligue) throws SauvegardeImpossible {
     try {
         PreparedStatement instruction = connection.prepareStatement(
-            "delete from ligue where id=?"
+            "delete from ligue where id_ligue=?"
         );
         instruction.setInt(1, ligue.getId_ligue());
         instruction.executeUpdate();
@@ -201,7 +199,7 @@ public void deleteLigue(Ligue ligue) throws SauvegardeImpossible {
 public void deleteEmploye(Employe employe) throws SauvegardeImpossible {
     try {
         PreparedStatement instruction = connection.prepareStatement(
-            "delete from employe where id=?"
+            "delete from employe where id_employe=?"
         );
         instruction.setInt(1, employe.getid());
         instruction.executeUpdate();
