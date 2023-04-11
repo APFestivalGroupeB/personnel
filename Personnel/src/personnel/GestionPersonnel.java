@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Collections;
 import java.util.SortedSet;
 import java.util.TreeSet;
+import java.time.LocalDate;
 
 /**
  * Gestion du personnel. Un seul objet de cette classe existe.
@@ -20,6 +21,7 @@ public class GestionPersonnel implements Serializable
 	private static final long serialVersionUID = -105283113987886425L;
 	private static GestionPersonnel gestionPersonnel = null;
 	private SortedSet<Ligue> ligues;
+	private SortedSet<Employe> employes;
 	private Employe root = new Employe(this, null, "root", "", "", "toor", null);
 	public final static int SERIALIZATION = 1, JDBC = 2, 
 			TYPE_PASSERELLE = JDBC;  
@@ -84,6 +86,7 @@ public class GestionPersonnel implements Serializable
 	{
 		Ligue ligue = new Ligue(this, nom); 
 		ligues.add(ligue);
+		passerelle.insertLigue(ligue);
 		return ligue;
 	}
 	
@@ -93,27 +96,47 @@ public class GestionPersonnel implements Serializable
 		ligues.add(ligue);
 		return ligue;
 	}
-
-	void remove(Ligue ligue)
+	public Employe addEmploye(Ligue id, String nom, String prenom, String mail, String password, LocalDate dateDepart) throws SauvegardeImpossible {
+		   Employe employe = new Employe(this, id, nom, prenom, mail, password,dateDepart);
+		   employes.add(employe);
+		   passerelle.insertEmploye(employe);
+		
+		return employe;
+	}
+	public Employe addEmploye(int id, String nom) throws SauvegardeImpossible
 	{
-		ligues.remove(ligue);
+		Employe employe = new Employe(this, id, nom);
+		employes.add(employe);
+		passerelle.insertEmploye(employe);
+		return employe;
 	}
 	
-	int insert(Ligue ligue) throws SauvegardeImpossible
+	void remove(Ligue ligue) throws SauvegardeImpossible
 	{
-		return passerelle.insert(ligue);
+		ligues.remove(ligue);
+		gestionPersonnel.deleteLigue(ligue);
 	}
-	int insertemploye(Employe employe) throws SauvegardeImpossible
+	
+	void remove(Employe employe) throws SauvegardeImpossible
 	{
-		return passerelle.insertemploye(employe);
+		
+	}
+	
+	int insertLigue(Ligue ligue) throws SauvegardeImpossible
+	{
+		return passerelle.insertLigue(ligue);
+	}
+	int insertEmploye(Employe employe) throws SauvegardeImpossible
+	{
+		return passerelle.insertEmploye(employe);
 	}
 	void updateLigue(Ligue ligue) throws SauvegardeImpossible
 	{
 		passerelle.updateLigue(ligue);
 	}
-	void updateEmploye(Employe employe) throws SauvegardeImpossible
+	void updateEmploye(Employe employe, String string) throws SauvegardeImpossible
 	{
-		passerelle.updateEmploye(employe);
+		passerelle.updateEmploye(employe, string);
 	}
 	void deleteLigue(Ligue ligue) throws SauvegardeImpossible
 	{

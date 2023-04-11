@@ -1,35 +1,27 @@
-DROP DATABASE IF EXISTS personnel; 
-CREATE DATABASE personnel ;
+DROP DATABASE IF EXISTS personnel;
+CREATE DATABASE personnel;
 USE personnel;
-
-
 
 DROP TABLE IF EXISTS Employe;
 DROP TABLE IF EXISTS Ligue;
 
-create table Employe (
-id_employe BIGINT(8) , 
-nomEmploye varchar(25),
-prenomEmploye varchar(25) ,
-password varchar(25) not null,
-mail varchar(70) not null,
+CREATE TABLE Employe (
+id_employe BIGINT(8) auto_increment not null,
+nomEmploye VARCHAR(25),
+prenomEmploye VARCHAR(25),
+password VARCHAR(25) NOT NULL,
+mail VARCHAR(70) NOT NULL,
 DateArrivee DATE,
-DateDepart DATE, 
+DateDepart DATE,
 id_ligue BIGINT,
+CONSTRAINT PK_EMP PRIMARY KEY(id_employe)
+) ENGINE=InnoDB;
 
-constraint PK_EMP primary key(id_employe)
-)ENGINE=INNODB;
-DESC Employe;
+CREATE TABLE Ligue (
+id_ligue BIGINT(4) auto_increment NOT null ,
+nom VARCHAR(255) NOT NULL,
+administrateur BIGINT(50),
+CONSTRAINT PK_LIG PRIMARY KEY(id_ligue)
+) ENGINE=InnoDB;
 
-create table Ligue(
-id_ligue  BIGINT(4), 
-nom varchar(255) not null, 
-administrateur varchar(50) not null, 
-
-
-constraint PK_LIG primary key(id_ligue)
-)ENGINE=INNODB;
-DESC Ligue;
-
-ALTER TABLE `Employe` ADD FOREIGN KEY (`id_ligue`) REFERENCES `ligue` (`id_ligue`);
-ALTER TABLE `Ligue` ADD FOREIGN KEY (`id_ligue`) REFERENCES `Employe` (`id_employe`);
+ALTER TABLE Employe add FOREIGN KEY FK_EMP_LIG (id_ligue) REFERENCES Ligue (id_ligue);

@@ -31,7 +31,7 @@ public class Ligue implements Serializable, Comparable<Ligue>
 	Ligue(GestionPersonnel gestionPersonnel, String nom) throws SauvegardeImpossible
 	{
 		this(gestionPersonnel,-1, nom);
-		this.id = gestionPersonnel.insert(this); 
+		this.id = gestionPersonnel.insertLigue(this); 
 	}
 
 	Ligue(GestionPersonnel gestionPersonnel, int id, String nom)
@@ -42,7 +42,15 @@ public class Ligue implements Serializable, Comparable<Ligue>
 		administrateur = gestionPersonnel.getRoot();
 		this.id = id;
 	}
-
+	public void update()
+	{
+		try {
+			gestionPersonnel.updateLigue(this);
+		} catch (SauvegardeImpossible e) {
+			
+			e.printStackTrace();
+		}
+	}
 	/**
 	 * Retourne le nom de la ligue.
 	 * @return le nom de la ligue.
@@ -65,6 +73,7 @@ public class Ligue implements Serializable, Comparable<Ligue>
 	public void setNom(String nom)
 	{
 		this.nom = nom;
+		this.update();
 	}
 
 	/**
@@ -118,7 +127,7 @@ public class Ligue implements Serializable, Comparable<Ligue>
 		Employe employe = new Employe(this.gestionPersonnel, this, nom, prenom, mail, password);
 		employes.add(employe);
 		try {
-			employe.setid(gestionPersonnel.insertemploye(employe));
+			employe.setid(gestionPersonnel.insertEmploye(employe));
 		} catch (SauvegardeImpossible e) {
 			e.printStackTrace();
 		}
@@ -130,10 +139,16 @@ public class Ligue implements Serializable, Comparable<Ligue>
 		Employe employe = new Employe(this.gestionPersonnel, this, nom, prenom, mail, password, dateDepart);
 		employes.add(employe);
 		try {
-			employe.setid(gestionPersonnel.insertemploye(employe));
+			employe.setid(gestionPersonnel.insertEmploye(employe));
 		} catch (SauvegardeImpossible e) {
 			e.printStackTrace();
 		}
+		return employe;
+	}
+	public Employe addEmployeConsole(String nom, String prenom, String mail, String password, LocalDate dateDepart)
+	{
+		Employe employe = new Employe(this.gestionPersonnel, this, nom, prenom, mail, password, dateDepart);
+		employes.add(employe);
 		return employe;
 	}
 	
@@ -147,7 +162,7 @@ public class Ligue implements Serializable, Comparable<Ligue>
 	 * de la ligue.
 	 */
 	
-	public void remove()
+	public void remove() throws SauvegardeImpossible
 	{
 		gestionPersonnel.remove(this);
 	}

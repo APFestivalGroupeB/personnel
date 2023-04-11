@@ -24,7 +24,7 @@ public class Employe implements Serializable, Comparable<Employe>
 	Employe(GestionPersonnel gestionPersonnel, String nom) throws SauvegardeImpossible
 	{
 		this(gestionPersonnel, -1, nom);
-		this.id_employe = gestionPersonnel.insertemploye(this); 
+		this.id_employe = gestionPersonnel.insertEmploye(this); 
 	}
 	Employe(GestionPersonnel gestionPersonnel, int id_employe, String nom)
 	{
@@ -60,6 +60,10 @@ public class Employe implements Serializable, Comparable<Employe>
 		this.dateArrivee = LocalDate.now();
 		this.dateDepart = dateDepart;
 	}
+	private void updateEmploye(String string) throws SauvegardeImpossible {
+		// TODO Auto-generated method stub
+		gestionPersonnel.updateEmploye(this, string);
+	}
 	public LocalDate getDateArrivee()
 	{
 		return this.dateArrivee;
@@ -67,12 +71,11 @@ public class Employe implements Serializable, Comparable<Employe>
 	public void setDateDepart(String dateDepart)
 	{
 		this.dateDepart = LocalDate.parse(dateDepart);
-//		try {
-//			this.updateEmploye("DateDepart");
-//		}catch(Sauvegarde Impossible e)
-//		{
-//			return e;
-//		}
+		try {
+			this.updateEmploye("DateDepart");
+		} catch (SauvegardeImpossible e) {
+			e.printStackTrace();
+		}
 	}
 	public LocalDate getDateDepart()
 	{
@@ -128,6 +131,11 @@ public class Employe implements Serializable, Comparable<Employe>
 	public void setNom(String nom)
 	{
 		this.nom = nom;
+		try {
+			this.updateEmploye("nomEmploye");
+		} catch (SauvegardeImpossible e) {
+			e.printStackTrace();
+		}
 	}
 
 	/**
@@ -148,6 +156,11 @@ public class Employe implements Serializable, Comparable<Employe>
 	public void setPrenom(String prenom)
 	{
 		this.prenom = prenom;
+		try {
+			this.updateEmploye("prenomEmploye");
+		} catch (SauvegardeImpossible e) {
+			e.printStackTrace();
+		}
 	}
 
 	/**
@@ -168,6 +181,11 @@ public class Employe implements Serializable, Comparable<Employe>
 	public void setMail(String mail)
 	{
 		this.mail = mail;
+		try {
+			this.updateEmploye("mail");
+		} catch (SauvegardeImpossible e) {
+			e.printStackTrace();
+		}
 	}
 
 	/**
@@ -191,6 +209,11 @@ public class Employe implements Serializable, Comparable<Employe>
 	public void setPassword(String password)
 	{
 		this.password= password;
+		try {
+			this.updateEmploye("password");
+		} catch (SauvegardeImpossible e) {
+			e.printStackTrace();
+		}
 	}
 	
 	public String getPassword()

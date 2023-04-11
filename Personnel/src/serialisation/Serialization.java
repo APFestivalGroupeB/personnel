@@ -47,7 +47,7 @@ public class Serialization implements personnel.Passerelle
 	}
 	
 	@Override
-	public int insert(Ligue ligue) throws SauvegardeImpossible
+	public int insertLigue(Ligue ligue) throws SauvegardeImpossible
 	{
 		return -1;
 	}
@@ -56,7 +56,7 @@ public class Serialization implements personnel.Passerelle
 		
 	}
 
-	public void updateEmploye(Employe employe) throws SauvegardeImpossible
+	public void updateEmploye(Employe employe, String string) throws SauvegardeImpossible
 	{
 		
 	}
@@ -72,7 +72,7 @@ public class Serialization implements personnel.Passerelle
 	}
 
 	@Override
-	public int insertemploye(Employe employe) throws SauvegardeImpossible {
+	public int insertEmploye(Employe employe) throws SauvegardeImpossible {
 		return -1;
 	}
 
