@@ -49,7 +49,7 @@ public class Serialization implements personnel.Passerelle
 	@Override
 	public int insertLigue(Ligue ligue) throws SauvegardeImpossible
 	{
-		return -1;
+		return 0;
 	}
 	public void updateLigue(Ligue ligue) throws SauvegardeImpossible
 	{

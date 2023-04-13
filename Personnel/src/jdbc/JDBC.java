@@ -47,7 +47,7 @@ public class JDBC implements Passerelle
 			
 			while (ligues.next())
 			{
-				gestionPersonnel.addLigue(ligues.getInt("id_ligue"), ligues.getString("nom"));
+				gestionPersonnel.addLigueConsole(ligues.getInt("id_ligue"), ligues.getString("nom"));
 		        PreparedStatement response = connection.prepareStatement("SELECT * FROM employe WHERE id_ligue = ?");
 		        response.setInt(1, ligues.getInt("id_ligue"));
 		        ResultSet employe = response.executeQuery();
@@ -105,7 +105,7 @@ public class JDBC implements Passerelle
 	{
 		try 
 		{
-			String sql = "insert into ligue(nom) values (?)";
+			String sql = "insert into ligue (nom) values (?)";
 			PreparedStatement instruction;
 			instruction = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 			instruction.setString(1, ligue.getNom());

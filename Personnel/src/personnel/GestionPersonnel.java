@@ -86,17 +86,19 @@ public class GestionPersonnel implements Serializable
 	{
 		Ligue ligue = new Ligue(this, nom); 
 		ligues.add(ligue);
-		passerelle.insertLigue(ligue);
+		
 		return ligue;
 	}
 	
-	public Ligue addLigue(int id, String nom)
+	public Ligue addLigueConsole(int id, String nom)
 	{
 		Ligue ligue = new Ligue(this, id, nom);
 		ligues.add(ligue);
 		return ligue;
 	}
-	public Employe addEmploye(Ligue id, String nom, String prenom, String mail, String password, LocalDate dateDepart) throws SauvegardeImpossible {
+	
+	public Employe addEmploye(Ligue id, String nom, String prenom, String mail, String password, LocalDate dateDepart) throws SauvegardeImpossible 
+	{
 		   Employe employe = new Employe(this, id, nom, prenom, mail, password,dateDepart);
 		   employes.add(employe);
 		   passerelle.insertEmploye(employe);
